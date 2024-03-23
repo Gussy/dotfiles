@@ -1,0 +1,23 @@
+[core]
+	editor = nano
+[user]
+	name = ***REMOVED-NAME***
+	email = ***REMOVED-EMAIL***
+	signingkey = /Users/gus/.ssh/id_ed25519.pub
+[gpg]
+	format = ssh
+[init]
+	defaultbranch = main
+[push]
+	autoSetupRemote = true
+[commit]
+	gpgsign = true
+[rerere]
+	enabled = true
+[column]
+	ui = auto
+[alias]
+	pushf = push --force-with-lease
+[maintenance]
+	auto = false
+	strategy = incremental
