@@ -1,0 +1,18 @@
+{
+  // Editor
+  "explorer.excludeGitIgnore": true,
+  "git.autoRepositoryDetection": false,
+  "git.detectSubmodules": false,
+  "search.exclude": {
+    "**/.git": true
+  },
+  "editor.formatOnSave": true,
+
+  // Hermit
+  "terminal.integrated.env.osx": {
+    "ACTIVE_HERMIT": null,
+    "HERMIT_ENV": null,
+    "HERMIT_ENV_OPS": null,
+    "HERMIT_BIN": null
+  }
+}
