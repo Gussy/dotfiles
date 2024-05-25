@@ -2,6 +2,7 @@
 
 HOME_DIR="$HOME"
 REPO_DIR="$(pwd)"
+IGNORED_FILES=("." ".." ".git" ".gitignore" ".vscode")
 
 # Function to backup dotfiles
 backup_dotfiles() {
@@ -12,9 +13,14 @@ backup_dotfiles() {
         if [[ $file == .* ]]; then
             # Check if the dotfile exists in the home directory
             if [ -e "$HOME_DIR/$file" ]; then
-                echo "Backing up $file..."
-                # Copy the file from the home directory to the repository directory
-                cp "$HOME_DIR/$file" "$REPO_DIR/$file"
+                # Check if the dotfile is in the ignored files list
+                if [[ " ${IGNORED_FILES[@]} " =~ " $file " ]]; then
+                    echo "Ignoring $file..."
+                else
+                    echo "Backing up $file..."
+                    # Copy the file from the home directory to the repository directory
+                    cp "$HOME_DIR/$file" "$REPO_DIR/$file"
+                fi
             else
                 echo "$file does not exist in the home directory."
             fi
