@@ -3,7 +3,7 @@
 [user]
 	name = ***REMOVED-NAME***
 	email = ***REMOVED-EMAIL***
-	signingkey = /Users/gus/.ssh/id_ed25519.pub
+	signingkey =
 [gpg]
 	format = ssh
 [init]
@@ -23,3 +23,6 @@
 	strategy = incremental
 [rebase]
 	updateRefs = true
+	autosquash = true
+[merge]
+    ff = only
