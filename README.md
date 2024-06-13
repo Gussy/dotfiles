@@ -7,7 +7,8 @@ Personal dot files for development.
 ```shell
 brew install fzf
 brew install zoxide
-brew install font-jetbrains-mono-nerd-font
+brew install jandedobbeleer/oh-my-posh/oh-my-posh
+brew install --cask font-cascadia-code-nf
 ```
 
 ## Install
