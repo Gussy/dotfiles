@@ -3,7 +3,7 @@
 HOME_DIR="$HOME"
 CONFIG_DIR="$HOME/.config"
 REPO_DIR="$(pwd)"
-IGNORED_FILES=("." ".." ".git" ".gitignore" ".vscode" "bin")
+IGNORED_FILES=("." ".." ".git" ".gitignore" ".vscode" "bin" ".config")
 CONFIG_FOLDERS=("ohmyposh" "iterm2-settings")
 
 echo "Home directory: $HOME_DIR"
@@ -48,12 +48,13 @@ install_config_folders() {
             read -p "$folder already exists in .config. Do you want to overwrite it? (y/n): " answer
             if [[ $answer = [Yy]* ]]; then
                 echo "Overwriting $folder..."
-                cp -r "$REPO_DIR/.config/$folder" "$CONFIG_DIR/$folder"
+                cp $REPO_DIR/.config/$folder/* $CONFIG_DIR/$folder/
             fi
         else
             echo "Installing $folder..."
             # Copy the folder from the repository directory to the .config directory
-            cp -r "$REPO_DIR/.config/$folder" "$CONFIG_DIR/$folder"
+            mkdir -p $REPO_DIR/.config/$folder
+            cp $REPO_DIR/.config/$folder/* $CONFIG_DIR/$folder/
         fi
     done
     echo "Installation complete."
