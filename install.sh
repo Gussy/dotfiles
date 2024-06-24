@@ -53,7 +53,7 @@ install_config_folders() {
         else
             echo "Installing $folder..."
             # Copy the folder from the repository directory to the .config directory
-            mkdir -p $REPO_DIR/.config/$folder
+            mkdir -p $HOME/.config/$folder
             cp $REPO_DIR/.config/$folder/* $CONFIG_DIR/$folder/
         fi
     done

@@ -1,5 +1,5 @@
 # Export environment variables
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export HOMEBREW_GITHUB_API_TOKEN=***REMOVED-GITHUB-TOKEN***
 export GPG_TTY=$(tty)
 
