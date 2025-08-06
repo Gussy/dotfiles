@@ -2,12 +2,17 @@
 
 HOME_DIR="$HOME"
 CONFIG_DIR="$HOME/.config"
+CACHE_DIR="$HOME/.cache"
 REPO_DIR="$(pwd)"
 IGNORED_FILES=("." ".." ".git" ".gitignore" ".vscode" "bin" ".config")
 CONFIG_FOLDERS=("ohmyposh" "iterm2-settings")
 
 echo "Home directory: $HOME_DIR"
 echo "Repository directory: $REPO_DIR"
+
+# Create necessary directories
+echo "Creating necessary directories..."
+mkdir -p "$CACHE_DIR/zinit/completions"
 
 # Function to restore or install dotfiles to the home directory
 install_dotfiles() {
