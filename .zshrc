@@ -78,5 +78,11 @@ alias c='clear'
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(test -x $HOME/bin/hermit && $HOME/bin/hermit shell-hooks --print --zsh)"
+if [[ "$CLAUDECODE" != "1" ]]; then
 eval "$(zoxide init --cmd cd zsh)"
+fi
 eval "${/opt/homebrew/bin/brew shellenv}"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

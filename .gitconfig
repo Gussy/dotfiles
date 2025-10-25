@@ -26,3 +26,6 @@
 	autosquash = true
 [merge]
     ff = only
+[gitbutler]
+	aiModelProvider = anthropic
+	aiAnthropicKeyOption = butlerAPI
