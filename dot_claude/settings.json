@@ -1,0 +1,6 @@
+{
+  "enabledPlugins": {
+    "playwright-skill@playwright-skill": true
+  },
+  "alwaysThinkingEnabled": true
+}

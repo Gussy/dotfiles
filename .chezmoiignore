@@ -1,0 +1,6 @@
+README.md
+bin/
+.vscode/
+.git/
+.gitignore
+CLAUDE.md

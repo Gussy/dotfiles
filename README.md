@@ -1,30 +1,54 @@
-# dotfiles
+# Dotfiles
 
-Personal dot files for development.
+Personal dotfiles managed with [chezmoi](https://www.chezmoi.io/).
 
-## Prerequisites
+## Machine Detection
 
-### MacOS
+- **Work laptops**: Hostname starts with `WORK` → no dottools PATH, no NVM
+- **Personal laptops**: Everything else → includes dottools PATH and NVM
 
-```shell
-brew install fzf
-brew install zoxide
-brew install jandedobbeleer/oh-my-posh/oh-my-posh
-brew install --cask font-cascadia-code-nf
-```
-
-### Debian
-
-```shell
-sudo apt install zsh fzf unzip
-curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-curl -s https://ohmyposh.dev/install.sh | bash -s
-```
-
-## Install
+## Setup
 
 ```bash
-source bin/activate-hermit
-just install
-chsh -s /usr/bin/zsh
+# First time on new machine
+git clone <this-repo> ~/Development/dotfiles
+chezmoi init --source=~/Development/dotfiles
+chezmoi apply
+
+# After first setup, source is saved in config
+# Just pull and apply:
+cd ~/Development/dotfiles
+git pull
+chezmoi apply
+```
+
+## Commands
+
+```bash
+# Apply dotfiles to system
+chezmoi apply
+
+# Preview changes before applying
+chezmoi diff
+
+# Apply with dry-run
+chezmoi apply --dry-run --verbose
+
+# Edit a dotfile (opens template in editor)
+chezmoi edit ~/.zshrc
+
+# Add new file to chezmoi
+chezmoi add ~/.newfile
+
+# List all managed files
+chezmoi managed
+
+# Show template variables for this machine
+chezmoi data
+
+# Verify template renders correctly
+chezmoi execute-template < dot_zshrc.tmpl
+
+# Reset config if needed
+chezmoi init --force
 ```

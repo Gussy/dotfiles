@@ -1,3 +1,4 @@
 .stowaway/
 .hermit/
+.claude/
 *.bak

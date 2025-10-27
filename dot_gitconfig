@@ -3,7 +3,7 @@
 [user]
 	name = ***REMOVED-NAME***
 	email = ***REMOVED-EMAIL***
-	signingkey =
+	signingkey = /Users/gus/.ssh/id_ed25519.pub
 [gpg]
 	format = ssh
 [init]

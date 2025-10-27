@@ -1,6 +1,9 @@
 # Export environment variables
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-export HOMEBREW_GITHUB_API_TOKEN=***REMOVED-GITHUB-TOKEN***
+{{- if .isWork }}
+export PATH="$HOME/bin:$PATH"
+{{- else }}
+export PATH="$HOME/bin:$HOME/Development/dottools/bin:$HOME/Development/dottools/.hermit/node/bin:$PATH"
+{{- end }}
 export GPG_TTY=$(tty)
 
 # Initialize Zinit
@@ -9,8 +12,8 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Add in Powerlevel10k
-# zinit ice depth=1; zinit light romkatv/powerlevel10k
+# Ensure completions cache directory exists
+[ ! -d "${XDG_CACHE_HOME:-${HOME}/.cache}/zinit/completions" ] && mkdir -p "${XDG_CACHE_HOME:-${HOME}/.cache}/zinit/completions"
 
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
@@ -79,10 +82,13 @@ alias c='clear'
 eval "$(fzf --zsh)"
 eval "$(test -x $HOME/bin/hermit && $HOME/bin/hermit shell-hooks --print --zsh)"
 if [[ "$CLAUDECODE" != "1" ]]; then
-eval "$(zoxide init --cmd cd zsh)"
+    eval "$(zoxide init --cmd cd zsh)"
 fi
 eval "${/opt/homebrew/bin/brew shellenv}"
+
+{{- if not .isWork }}
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+{{- end }}
