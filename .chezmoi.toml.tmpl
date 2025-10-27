@@ -1,4 +1,4 @@
-{{- $isWork := hasPrefix .chezmoi.hostname "WORK" -}}
+{{- $isWork := hasPrefix "WORK" .chezmoi.hostname -}}
 
 [data]
     isWork = {{ $isWork }}

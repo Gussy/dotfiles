@@ -34,6 +34,9 @@ zinit snippet OMZP::terraform
 zinit snippet OMZP::vscode
 zinit snippet OMZP::command-not-found
 
+# Add custom completions directory to fpath
+fpath=(~/.config/zsh/completions $fpath)
+
 # Load completions
 autoload -Uz compinit && compinit
 
@@ -81,9 +84,10 @@ alias c='clear'
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(test -x $HOME/bin/hermit && $HOME/bin/hermit shell-hooks --print --zsh)"
-if [[ "$CLAUDECODE" != "1" ]]; then
-    eval "$(zoxide init --cmd cd zsh)"
-fi
+
+# Only initialize in interactive shells to avoid issues with Claude Code
+[[ $- == *i* ]] && [ -z "$DISABLE_ZOXIDE" ] && eval "$(zoxide init --cmd cd zsh)"
+
 eval "${/opt/homebrew/bin/brew shellenv}"
 
 {{- if not .isWork }}
@@ -91,4 +95,9 @@ eval "${/opt/homebrew/bin/brew shellenv}"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+{{- end }}
+{{- if .isWork }}
+### The lines in this section are added automatically by salt. Do not modify. ###
+#Default shell configs
+######
 {{- end }}
