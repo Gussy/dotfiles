@@ -45,11 +45,6 @@ zinit cdreplay -q
 # Initialise oh-my-posh
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/zen.toml)"
 
-# Only load oh-my-posh if not in Apple Terminal
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh)"
-fi
-
 # Key bindings
 bindkey -e
 
@@ -88,10 +83,11 @@ eval "$(test -x $HOME/bin/hermit && $HOME/bin/hermit shell-hooks --print --zsh)"
 # Only initialize in interactive shells to avoid issues with Claude Code
 [[ $- == *i* ]] && [ -z "$DISABLE_ZOXIDE" ] && eval "$(zoxide init --cmd cd zsh)"
 
-eval "${/opt/homebrew/bin/brew shellenv}"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 {{- if not .isWork }}
 
+# Load nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

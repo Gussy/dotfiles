@@ -4,3 +4,7 @@ bin/
 .git/
 .gitignore
 CLAUDE.md
+scripts/
+bootstrap.sh
+Brewfile
+dock-apps.txt

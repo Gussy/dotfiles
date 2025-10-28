@@ -12,6 +12,7 @@ Personal dotfiles managed with [chezmoi](https://www.chezmoi.io/).
 ```bash
 # First time on new machine
 git clone <this-repo> ~/Development/dotfiles
+source bin/activate-hermit
 chezmoi init --source=~/Development/dotfiles
 chezmoi apply
 

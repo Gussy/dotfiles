@@ -1,0 +1,31 @@
+# Ghostty Terminal Configuration
+
+# Theme
+theme = Monokai Pro
+#theme = Catppuccin Latte
+
+# Font Configuration
+font-family = Monaspace Neon
+font-size = 14
+
+# Window Configuration
+window-padding-x = 10
+window-padding-y = 10
+window-decoration = true
+
+# Cursor
+cursor-style = block
+cursor-style-blink = true
+
+# Shell Integration
+shell-integration = detect
+shell-integration-features = cursor,sudo,title
+
+# Copy on select
+copy-on-select = false
+
+# Mouse
+mouse-hide-while-typing = true
+
+# Keybindings
+# Use native macOS keybindings by default

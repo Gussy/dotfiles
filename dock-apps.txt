@@ -1,0 +1,30 @@
+# Dock Applications Configuration
+#
+# Format: One app path per line
+# Lines starting with # are comments and will be ignored
+# Empty lines are ignored
+# Apps will be added to the Dock in the order listed
+#
+# Note: Finder is always present and cannot be removed
+# Note: Apps that don't exist will be skipped with a warning
+
+# Apps Menu (macOS Tahoe) / Launchpad (older macOS)
+/System/Applications/Apps.app
+/System/Applications/Launchpad.app
+
+# Web Browser
+/Applications/Google Chrome.app
+
+# Communication
+/System/Applications/Messages.app
+
+# System
+/System/Applications/System Settings.app
+/System/Applications/System Preferences.app
+
+# Development
+/Applications/Visual Studio Code.app
+/Applications/Claude.app
+
+# Terminal
+/Applications/Ghostty.app
