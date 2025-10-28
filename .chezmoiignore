@@ -8,3 +8,4 @@ scripts/
 bootstrap.sh
 Brewfile
 dock-apps.txt
+*.md

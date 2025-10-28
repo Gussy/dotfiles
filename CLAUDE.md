@@ -14,8 +14,8 @@ This is a **chezmoi-managed dotfiles repository** using a custom source director
 
 ### Machine Detection System
 
-The `.chezmoi.toml.tmpl` template implements hostname-based machine detection:
-- Work laptops: Hostname starts with `WORK` → sets `.isWork = true`
+The `.chezmoi.toml.tmpl` template implements hostname-based machine detection using Bitwarden:
+- Work laptops: Hostname starts with configured work prefix (stored in Bitwarden) → sets `.isWork = true`
 - Personal laptops: All others → sets `.isWork = false`
 
 This boolean is used in templates to conditionally include configurations.

@@ -1,8 +1,8 @@
 [core]
 	editor = nano
 [user]
-	name = ***REMOVED-NAME***
-	email = ***REMOVED-EMAIL***
+	name = {{ (bitwardenFields "item" "Dotfiles Configuration").git_name.value }}
+	email = {{ (bitwardenFields "item" "Dotfiles Configuration").git_email.value }}
 	signingkey = /Users/{{ .chezmoi.username }}/.ssh/id_ed25519.pub
 [gpg]
 	format = ssh

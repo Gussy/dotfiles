@@ -61,6 +61,64 @@ else
 fi
 
 ###############################################################################
+# Bitwarden Setup                                                            #
+###############################################################################
+
+echo ""
+echo "🔐 Setting up Bitwarden for dotfiles secrets..."
+
+# Check if bw is installed
+if ! command -v bw &> /dev/null; then
+    echo "❌ Bitwarden CLI not found. Installing via Homebrew..."
+    brew install bitwarden-cli
+fi
+
+# Check Bitwarden login status
+BW_STATUS=$(bw status | jq -r .status)
+
+if [ "$BW_STATUS" = "unauthenticated" ]; then
+    echo "Please login to Bitwarden:"
+    bw login
+    BW_STATUS=$(bw status | jq -r .status)
+fi
+
+# Unlock vault if locked
+if [ "$BW_STATUS" = "locked" ]; then
+    echo "Unlocking Bitwarden vault..."
+    echo "Please enter your Bitwarden master password:"
+    export BW_SESSION=$(bw unlock --raw)
+else
+    # Already unlocked, get session
+    export BW_SESSION=$(bw unlock --raw 2>/dev/null || echo "")
+fi
+
+# Verify we can access Bitwarden
+if bw list items --session "$BW_SESSION" &> /dev/null; then
+    echo "✅ Bitwarden connected successfully"
+
+    # Check for Dotfiles Configuration item
+    if bw list items --session "$BW_SESSION" | jq -e '.[] | select(.name=="Dotfiles Configuration")' > /dev/null; then
+        echo "✅ Found 'Dotfiles Configuration' item in Bitwarden"
+    else
+        echo "⚠️  WARNING: 'Dotfiles Configuration' item not found in Bitwarden!"
+        echo "   Please create this item with the following custom fields:"
+        echo "   - git_name: Your full name"
+        echo "   - git_email: Your email address"
+        echo "   - work_hostname_prefix: Work machine hostname prefix"
+        echo ""
+        echo "   See BITWARDEN_SETUP.md for detailed instructions."
+        echo ""
+        read -p "Press Enter to continue anyway, or Ctrl+C to abort..."
+    fi
+else
+    echo "❌ Failed to connect to Bitwarden. Please check your credentials."
+    exit 1
+fi
+
+# Export session for chezmoi to use
+export BW_SESSION
+
+###############################################################################
 # SSH Key Setup                                                              #
 ###############################################################################
 
@@ -129,17 +187,6 @@ else
 fi
 
 ###############################################################################
-# iTerm2 Setup                                                               #
-###############################################################################
-
-echo ""
-if [ -f "scripts/setup-iterm2.sh" ]; then
-    bash scripts/setup-iterm2.sh
-else
-    echo "⚠️  scripts/setup-iterm2.sh not found, skipping..."
-fi
-
-###############################################################################
 # Dock Configuration                                                         #
 ###############################################################################
 
@@ -151,6 +198,37 @@ else
 fi
 
 ###############################################################################
+# Chezmoi Initialization                                                     #
+###############################################################################
+
+echo ""
+echo "🏠 Initializing chezmoi with dotfiles..."
+
+# Get the absolute path to this repository
+DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Initialize chezmoi with this repo as the source
+if command -v chezmoi &> /dev/null; then
+    echo "Running chezmoi init..."
+    chezmoi init --source="$DOTFILES_DIR"
+
+    echo ""
+    echo "Applying dotfiles configuration..."
+    echo "Note: This will use Bitwarden for sensitive values (name, email, etc.)"
+
+    # Apply the dotfiles with BW_SESSION available
+    if chezmoi apply --verbose; then
+        echo "✅ Dotfiles applied successfully"
+    else
+        echo "⚠️  Some dotfiles may not have been applied. Check errors above."
+        echo "   You can re-run 'chezmoi apply' after fixing any issues."
+    fi
+else
+    echo "⚠️  chezmoi not found. Install it with: brew install chezmoi"
+    echo "   Then run: chezmoi init --source=$DOTFILES_DIR && chezmoi apply"
+fi
+
+###############################################################################
 # Done!                                                                       #
 ###############################################################################
 
@@ -159,9 +237,19 @@ echo "╔═══════════════════════�
 echo "║                    Setup Complete!                         ║"
 echo "╚════════════════════════════════════════════════════════════╝"
 echo ""
+echo "✅ Your development environment is ready!"
+echo ""
 echo "Next steps:"
-echo "  1. Restart your computer for all macOS changes to take effect"
-echo "  2. Add your SSH public key to GitHub/GitLab if you haven't already"
-echo "  3. Run 'chezmoi init' if you haven't already initialized chezmoi"
-echo "  4. Run 'chezmoi apply' to apply your dotfiles"
+echo "  1. Add your SSH public key to GitHub if you haven't already"
+echo "     cat ~/.ssh/id_ed25519.pub | pbcopy"
+echo ""
+echo "  2. Restart your terminal or run: source ~/.zshrc"
+echo ""
+echo "  3. (Optional) Restart your computer for all macOS changes to take effect"
+echo ""
+echo "📚 Useful commands:"
+echo "  • chezmoi diff    - Preview changes before applying"
+echo "  • chezmoi apply   - Apply dotfile changes"
+echo "  • chezmoi edit    - Edit a dotfile"
+echo "  • bw unlock       - Unlock Bitwarden vault (sets BW_SESSION)"
 echo ""

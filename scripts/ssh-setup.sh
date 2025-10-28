@@ -67,7 +67,7 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
     echo ""
     echo "✅ SSH key generated successfully"
     echo ""
-    echo "📋 Copy this public key to GitHub/GitLab:"
+    echo "📋 Copy this public key to GitHub:"
     echo "======================================"
     cat ~/.ssh/id_ed25519.pub
     echo "======================================"

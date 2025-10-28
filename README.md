@@ -1,23 +1,60 @@
 # Dotfiles
 
-Personal dotfiles managed with [chezmoi](https://www.chezmoi.io/).
+Personal dotfiles managed with [chezmoi](https://www.chezmoi.io/) and [Bitwarden](https://bitwarden.com/).
 
-## Machine Detection
+## Quick Start
 
-- **Work laptops**: Hostname starts with `WORK` → no dottools PATH, no NVM
-- **Personal laptops**: Everything else → includes dottools PATH and NVM
-
-## Setup
+**One-liner for fresh macOS setup:**
 
 ```bash
-# First time on new machine
-git clone <this-repo> ~/Development/dotfiles
-source bin/activate-hermit
-chezmoi init --source=~/Development/dotfiles
-chezmoi apply
+git clone https://github.com/Gussy/dotfiles.git ~/Development/dotfiles && cd ~/Development/dotfiles && ./bootstrap.sh
+```
 
-# After first setup, source is saved in config
-# Just pull and apply:
+This will:
+- Install Homebrew and all packages
+- Set up Bitwarden CLI for secrets management
+- Initialize chezmoi and apply dotfiles
+- Configure SSH, npm, macOS settings, and more
+
+**Prerequisites**: You'll need a Bitwarden account with a "Dotfiles Configuration" item. See [BITWARDEN_SETUP.md](BITWARDEN_SETUP.md) for details.
+
+---
+
+## How It Works
+
+### Machine Detection
+
+Dotfiles automatically detect work vs personal machines using hostname prefixes stored securely in Bitwarden:
+- **Work laptops**: Hostname matches configured prefix → excludes personal dev tools
+- **Personal laptops**: Everything else → includes full development environment
+
+### Secrets Management
+
+Sensitive values (git name, email, work hostname prefix) are stored in Bitwarden, not in the repository. Templates fetch these values at apply-time using `bitwardenFields`.
+
+## Manual Setup
+
+If you prefer not to use the bootstrap script:
+
+```bash
+# Clone the repo
+git clone https://github.com/Gussy/dotfiles.git ~/Development/dotfiles
+cd ~/Development/dotfiles
+
+# Set up Bitwarden (follow BITWARDEN_SETUP.md)
+bw login
+export BW_SESSION="$(bw unlock --raw)"
+
+# Initialize and apply with chezmoi
+chezmoi init --source=~/dotfiles
+chezmoi apply
+```
+
+## Updating Dotfiles
+
+After initial setup:
+
+```bash
 cd ~/Development/dotfiles
 git pull
 chezmoi apply

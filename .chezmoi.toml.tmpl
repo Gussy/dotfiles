@@ -1,4 +1,14 @@
-{{- $isWork := hasPrefix "WORK" .chezmoi.hostname -}}
+{{- $workPrefix := (bitwardenFields "item" "Dotfiles Configuration").work_hostname_prefix.value -}}
+{{- $isWork := hasPrefix $workPrefix .chezmoi.hostname -}}
+
+# Chezmoi source directory (where dotfiles repo is stored)
+sourceDir = "{{ .chezmoi.sourceDir }}"
 
 [data]
     isWork = {{ $isWork }}
+
+[edit]
+    command = "nano"
+
+[bitwarden]
+    command = "/opt/homebrew/bin/bw"
