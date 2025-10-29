@@ -5,6 +5,7 @@ export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/bin:$HOME/Development/dottools/bin:$HOME/Development/dottools/.hermit/node/bin:$PATH"
 {{- end }}
 export GPG_TTY=$(tty)
+export HOMEBREW_NO_ANALYTICS=1
 
 # Initialize Zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -92,6 +93,20 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 {{- end }}
+
+# Bitwarden helper function
+bwu() {
+    echo "Unlocking Bitwarden vault..."
+    export BW_SESSION="$(bw unlock --raw)"
+    if [ $? -eq 0 ]; then
+        echo "✓ Bitwarden unlocked. BW_SESSION exported."
+        echo "  You can now run chezmoi commands."
+    else
+        echo "✗ Failed to unlock Bitwarden."
+        return 1
+    fi
+}
+
 {{- if .isWork }}
 ### The lines in this section are added automatically by salt. Do not modify. ###
 #Default shell configs
