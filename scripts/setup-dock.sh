@@ -89,8 +89,8 @@ defaults write com.apple.dock autohide-delay -float 0
 # Set auto-hide animation time
 defaults write com.apple.dock autohide-time-modifier -float 0.5
 
-# Don't show recent applications in Dock
-defaults write com.apple.dock show-recents -bool false
+# Show recent applications in Dock (on right side with separator)
+defaults write com.apple.dock show-recents -bool true
 
 # Minimize windows into their application icon
 defaults write com.apple.dock minimize-to-application -bool true

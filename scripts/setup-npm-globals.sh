@@ -17,7 +17,6 @@ fi
 # List of global packages to install
 packages=(
     "@anthropic-ai/claude-code"
-    "aicommit2"
 )
 
 for package in "${packages[@]}"; do
