@@ -12,20 +12,31 @@
 /System/Applications/Apps.app
 /System/Applications/Launchpad.app
 
-# Web Browser
-/Applications/Google Chrome.app
-
-# Communication
-/System/Applications/Messages.app
-
 # System
 /System/Applications/System Settings.app
 /System/Applications/System Preferences.app
 
-# Development
-/Applications/Visual Studio Code.app
-/Applications/GitButler.app
-/Applications/Claude.app
+# Communication
+/Applications/Discord.app
+
+# Web Browser
+/Applications/Google Chrome.app
+
+# Remote Desktop
+/Applications/Windows App.app
+
+# Communication
+/System/Applications/Messages.app
 
 # Terminal
 /Applications/Ghostty.app
+
+# Development
+/Applications/Visual Studio Code.app
+/Applications/GitButler.app
+/Applications/Notion.app
+/Applications/Claude.app
+/Applications/ChatGPT.app
+
+# Media & Design
+/Users/gus/Library/Application Support/Autodesk/webdeploy/production/Autodesk Fusion.app
