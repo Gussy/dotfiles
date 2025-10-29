@@ -14,5 +14,6 @@ brew "fzf"
 
 # GUI Applications
 cask "visual-studio-code"
+cask "gitbutler"
 cask "claude"
 cask "tailscale-app"

@@ -24,6 +24,7 @@
 
 # Development
 /Applications/Visual Studio Code.app
+/Applications/GitButler.app
 /Applications/Claude.app
 
 # Terminal
