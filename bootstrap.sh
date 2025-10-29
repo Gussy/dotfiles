@@ -27,6 +27,24 @@ else
 fi
 
 ###############################################################################
+# Rosetta 2 (for Apple Silicon)                                              #
+###############################################################################
+
+echo ""
+if [[ $(uname -m) == 'arm64' ]]; then
+    echo "🔄 Checking for Rosetta 2..."
+    if /usr/bin/pgrep oahd >/dev/null 2>&1; then
+        echo "✅ Rosetta 2 already installed"
+    else
+        echo "Installing Rosetta 2 (required for x86_64 compatibility)..."
+        softwareupdate --install-rosetta --agree-to-license
+        echo "✅ Rosetta 2 installed"
+    fi
+else
+    echo "ℹ️  Intel Mac detected, Rosetta 2 not needed"
+fi
+
+###############################################################################
 # Homebrew                                                                    #
 ###############################################################################
 
