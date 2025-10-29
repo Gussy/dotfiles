@@ -29,3 +29,4 @@ mouse-hide-while-typing = true
 
 # Keybindings
 # Use native macOS keybindings by default
+keybind = shift+enter=text:\x1b\r
