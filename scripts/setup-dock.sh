@@ -92,8 +92,11 @@ defaults write com.apple.dock autohide-time-modifier -float 0.5
 # Show recent applications in Dock (on right side with separator)
 defaults write com.apple.dock show-recents -bool true
 
-# Minimize windows into their application icon
-defaults write com.apple.dock minimize-to-application -bool true
+# Show minimized windows as separate icons in Dock
+defaults write com.apple.dock minimize-to-application -bool false
+
+# Add Downloads folder to Dock (to the left of Trash)
+defaults write com.apple.dock persistent-others -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>file://$HOME/Downloads/</string><key>_CFURLStringType</key><integer>15</integer></dict></dict></dict>"
 
 # Restart Dock to apply changes
 echo "🔄 Restarting Dock..."
