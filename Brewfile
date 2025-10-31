@@ -1,6 +1,7 @@
 # CLI tools
 brew "git"
 brew "ripgrep"
+brew "fd"
 brew "dockutil"
 brew "mas"
 brew "bitwarden-cli"
