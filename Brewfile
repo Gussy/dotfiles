@@ -5,6 +5,7 @@ brew "fd"
 brew "dockutil"
 brew "mas"
 brew "bitwarden-cli"
+brew "gh"
 
 # Terminal Setup
 cask "ghostty"
