@@ -1,8 +1,8 @@
 # Export environment variables
 {{- if .isWork }}
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 {{- else }}
-export PATH="$HOME/bin:$HOME/Development/dottools/bin:$HOME/Development/dottools/.hermit/node/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:$HOME/Development/dottools/bin:$HOME/Development/dottools/.hermit/node/bin:$PATH"
 {{- end }}
 export GPG_TTY=$(tty)
 export HOMEBREW_NO_ANALYTICS=1
