@@ -7,6 +7,7 @@ brew "mas"
 brew "bitwarden-cli"
 brew "gh"
 brew "jq"
+brew "croc"
 
 # Terminal Setup
 cask "ghostty"
@@ -30,3 +31,4 @@ cask "crystalfetch"
 cask "obs"
 cask "notion"
 cask "chatgpt"
+cask "affinity"
