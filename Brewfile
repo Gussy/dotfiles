@@ -8,6 +8,8 @@ brew "bitwarden-cli"
 brew "gh"
 brew "jq"
 brew "croc"
+tap "gussy/tap"
+cask "gussy/tap/cmt"
 
 # Terminal Setup
 cask "ghostty"

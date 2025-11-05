@@ -7,6 +7,9 @@ export PATH="$HOME/bin:$HOME/.local/bin:$HOME/Development/dottools/bin:$HOME/Dev
 export GPG_TTY=$(tty)
 export HOMEBREW_NO_ANALYTICS=1
 
+# Initialize Homebrew environment (must be before compinit for completions)
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Initialize Zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
@@ -37,6 +40,9 @@ zinit snippet OMZP::command-not-found
 
 # Add custom completions directory to fpath
 fpath=(~/.config/zsh/completions $fpath)
+
+# Ensure custom completions directory exists
+mkdir -p ~/.config/zsh/completions
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -83,8 +89,6 @@ eval "$(test -x $HOME/bin/hermit && $HOME/bin/hermit shell-hooks --print --zsh)"
 
 # Only initialize in interactive shells to avoid issues with Claude Code
 [[ $- == *i* ]] && [ -z "$DISABLE_ZOXIDE" ] && eval "$(zoxide init --cmd cd zsh)"
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 {{- if not .isWork }}
 
