@@ -8,6 +8,9 @@ brew "bitwarden-cli"
 brew "gh"
 brew "jq"
 brew "croc"
+brew "gnupg"
+
+# CLI tools (casks)
 tap "gussy/tap"
 cask "gussy/tap/cmt"
 
