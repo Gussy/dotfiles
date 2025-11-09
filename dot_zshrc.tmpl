@@ -111,6 +111,31 @@ bwu() {
     fi
 }
 
+# Create tar.xz archives
+# Verbose output + exclude common directories
+tarc() {
+  if [ -z "$1" ]; then
+    echo "Usage: tarc <directory|file>"
+    return 1
+  fi
+  local target="${1%/}"
+  tar -cJvf "${target}.tar.xz" \
+    --exclude='node_modules' \
+    --exclude='target' \
+    --exclude='build' \
+    "$target"
+}
+
+# Extract tar.xz archives
+# Verbose extraction
+tarx() {
+  if [ -z "$1" ]; then
+    echo "Usage: tarx <archive>"
+    return 1
+  fi
+  tar -xvf "$1"
+}
+
 {{- if .isWork }}
 ### The lines in this section are added automatically by salt. Do not modify. ###
 #Default shell configs
