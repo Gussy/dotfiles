@@ -9,6 +9,7 @@ brew "gh"
 brew "jq"
 brew "croc"
 brew "gnupg"
+brew "homebrew/dupes/nano"
 
 # CLI tools (casks)
 tap "gussy/tap"
