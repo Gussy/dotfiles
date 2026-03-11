@@ -49,7 +49,11 @@ autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
-# Initialise oh-my-posh
+# Shell integrations (Hermit must init before oh-my-posh so prompt renders last)
+eval "$(fzf --zsh)"
+eval "$(test -x $HOME/bin/hermit && $HOME/bin/hermit shell-hooks --print --zsh)"
+
+# Initialise oh-my-posh (after Hermit so its precmd hook runs last and owns the prompt)
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/zen.toml)"
 
 # Key bindings
@@ -82,10 +86,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # Aliases
 alias ls='ls --color'
 alias c='clear'
-
-# Shell integrations
-eval "$(fzf --zsh)"
-eval "$(test -x $HOME/bin/hermit && $HOME/bin/hermit shell-hooks --print --zsh)"
+alias ssh='TERM=xterm-256color ssh'
 
 # Only initialize in interactive shells to avoid issues with Claude Code
 [[ $- == *i* ]] && [ -z "$DISABLE_ZOXIDE" ] && eval "$(zoxide init --cmd cd zsh)"
