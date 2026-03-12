@@ -19,7 +19,7 @@
 [alias]
 	pushf = push --force-with-lease
 	bu = "!git branch -u origin/$(git symbolic-ref --short HEAD)"
-	ca = commit --amend
+	ca = commit --amend --no-edit
 [maintenance]
 	auto = false
 	strategy = incremental
