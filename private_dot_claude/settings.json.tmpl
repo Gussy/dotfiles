@@ -1,0 +1,23 @@
+{
+  "model": "opus[1m]",
+  "enabledPlugins": {
+    "hermit@block-claude-plugins": true,
+    "clangd-lsp@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true
+  },
+  "fastMode": {{ .isWork }},
+  "permissions": {
+    "allow": [
+      "Bash(.*)",
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "WebFetch",
+      "WebSearch",
+      "Agent",
+      "NotebookEdit"
+    ]
+  }
+}
