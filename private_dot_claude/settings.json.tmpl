@@ -1,9 +1,21 @@
 {
   "model": "opus[1m]",
   "enabledPlugins": {
+{{- if .isWork }}
     "hermit@block-claude-plugins": true,
+{{- end }}
     "clangd-lsp@claude-plugins-official": true,
-    "gopls-lsp@claude-plugins-official": true
+    "gopls-lsp@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "impeccable@impeccable": true
+  },
+  "extraKnownMarketplaces": {
+    "impeccable": {
+      "source": {
+        "source": "github",
+        "repo": "pbakaus/impeccable"
+      }
+    }
   },
   "fastMode": {{ .isWork }},
   "permissions": {
@@ -74,14 +86,11 @@
       "Bash(cargo fmt*)",
       "Bash(brew *)",
       "Read",
-      "Edit",
-      "Write",
       "Glob",
       "Grep",
       "WebFetch",
       "WebSearch",
-      "Agent",
-      "NotebookEdit"
+      "Agent"
     ],
     "deny": [
       "Bash(git commit*)",
