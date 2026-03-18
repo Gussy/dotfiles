@@ -1,24 +1,5 @@
 {
-  "model": "opus[1m]",
-  "enabledPlugins": {
-{{- if .isWork }}
-    "hermit@block-claude-plugins": true,
-{{- end }}
-    "clangd-lsp@claude-plugins-official": true,
-    "gopls-lsp@claude-plugins-official": true,
-    "rust-analyzer-lsp@claude-plugins-official": true,
-    "impeccable@impeccable": true
-  },
-  "extraKnownMarketplaces": {
-    "impeccable": {
-      "source": {
-        "source": "github",
-        "repo": "pbakaus/impeccable"
-      }
-    }
-  },
   "includeCoAuthoredBy": false,
-  "fastMode": {{ .isWork }},
   "permissions": {
     "allow": [
       "Bash(git status*)",
@@ -111,5 +92,29 @@
       "Bash(npm publish*)",
       "Bash(cargo publish*)"
     ]
-  }
+  },
+  "model": "opus[1m]",
+  "enabledPlugins": {
+{{- if .isWork }}
+    "hermit@block-claude-plugins": true,
+{{- end }}
+    "clangd-lsp@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "impeccable@impeccable": true,
+    "frontend-design@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "impeccable": {
+      "source": {
+        "source": "github",
+        "repo": "pbakaus/impeccable"
+      }
+    }
+  },
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "fastMode": {{ .isWork }},
+  "voiceEnabled": true
 }
