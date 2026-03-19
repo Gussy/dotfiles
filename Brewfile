@@ -9,6 +9,7 @@ brew "gh"
 brew "jq"
 brew "croc"
 brew "gnupg"
+brew "azure-cli"
 
 # CLI tools (casks)
 tap "gussy/tap"
