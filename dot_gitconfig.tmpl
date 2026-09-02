@@ -1,5 +1,7 @@
 [core]
 	editor = nano
+	fsmonitor = false
+	untrackedCache = true
 [user]
 	name = {{ (bitwardenFields "item" "Dotfiles Configuration").git_name.value }}
 	email = {{ (bitwardenFields "item" "Dotfiles Configuration").git_email.value }}
