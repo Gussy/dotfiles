@@ -28,5 +28,5 @@ copy-on-select = false
 mouse-hide-while-typing = true
 
 # Keybindings
-# Use native macOS keybindings by default
-keybind = shift+enter=text:\x1b\r
+# Insert LF so terminal TUIs like Codex treat Shift+Enter as a newline.
+keybind = shift+enter=text:\x0a

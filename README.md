@@ -12,6 +12,7 @@ git clone https://github.com/Gussy/dotfiles.git ~/Development/dotfiles && cd ~/D
 
 This will:
 - Install Homebrew and all packages
+- Install Android Studio, Android SDK 35, NDK `27.0.12077973`, and JDK 17
 - Set up Bitwarden CLI for secrets management
 - Initialize chezmoi and apply dotfiles
 - Configure SSH, npm, macOS settings, and more
@@ -41,9 +42,15 @@ If you prefer not to use the bootstrap script:
 git clone https://github.com/Gussy/dotfiles.git ~/Development/dotfiles
 cd ~/Development/dotfiles
 
+# Install Homebrew packages
+brew bundle install --file=Brewfile
+
 # Set up Bitwarden (follow BITWARDEN_SETUP.md)
 bw login
 export BW_SESSION="$(bw unlock --raw)"
+
+# Install Android SDK components
+bash scripts/setup-android.sh
 
 # Initialize and apply with chezmoi
 chezmoi init --source=~/dotfiles

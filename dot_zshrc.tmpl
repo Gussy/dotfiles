@@ -1,14 +1,8 @@
 # Export environment variables
-{{- if .isWork }}
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-{{- else }}
-export PATH="$HOME/bin:$HOME/.local/bin:$HOME/Development/dottools/bin:$HOME/Development/dottools/.hermit/node/bin:$PATH"
-{{- end }}
-export GPG_TTY=$(tty)
-export HOMEBREW_NO_ANALYTICS=1
-
-# Initialize Homebrew environment (must be before compinit for completions)
-eval "$(/opt/homebrew/bin/brew shellenv)"
+source "$HOME/.config/zsh/env.zsh"
+if [[ -t 0 || -t 1 ]]; then
+  export GPG_TTY="$(tty)"
+fi
 
 # Initialize Zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -93,10 +87,13 @@ alias ssh='TERM=xterm-256color ssh'
 
 {{- if not .isWork }}
 
-# Load nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Load nvm outside Hermit environments. Hermit manages Node per repo and sets
+# NPM_CONFIG_PREFIX, which nvm rejects during initialization.
+if [ -z "${HERMIT_ENV-}" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
 {{- end }}
 
 # Bitwarden helper function
