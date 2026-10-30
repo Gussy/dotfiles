@@ -9,3 +9,5 @@ bootstrap.sh
 Brewfile
 dock-apps.txt
 *.md
+bootstrap-light.sh
+Brewfile.light

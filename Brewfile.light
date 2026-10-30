@@ -1,0 +1,9 @@
+# Terminal and shell dependencies only
+brew "chezmoi"
+brew "fzf"
+brew "zoxide"
+brew "oh-my-posh"
+brew "ripgrep"
+brew "fd"
+cask "ghostty"
+cask "font-monaspace"

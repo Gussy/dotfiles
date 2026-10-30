@@ -2,6 +2,24 @@
 
 Personal dotfiles managed with [chezmoi](https://www.chezmoi.io/) and [Bitwarden](https://bitwarden.com/).
 
+## Light setup (macOS)
+
+For Ghostty, the zsh configuration, prompt, font, and a few CLI basics without
+Bitwarden, Android, macOS preferences, or the full application bundle:
+
+```bash
+git clone https://github.com/Gussy/dotfiles.git ~/Development/dotfiles
+cd ~/Development/dotfiles
+./bootstrap-light.sh
+```
+
+Homebrew must already be installed. The script installs `Brewfile.light`, previews
+and applies only the shell, prompt, and Ghostty files using a temporary chezmoi
+config. It uses the personal shell variant; it does not configure Git identity or
+signing. Review the preview and back up existing files before running: `chezmoi
+apply` can overwrite them. Run the script again after pulling updates. The first
+interactive zsh session downloads zinit and its plugins.
+
 ## Quick Start
 
 **One-liner for fresh macOS setup:**
